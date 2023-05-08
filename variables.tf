@@ -3,5 +3,5 @@ variable "aws_secret_key" {}
 variable "private_key_path" {}
 variable "key_name" {}
 variable "aws_region" {
-  default = "us-west-2"
+  default = "us-east-1"
 }
