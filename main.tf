@@ -1,21 +1,34 @@
 # Create EC2 Instance
 
 resource "aws_instance" "training_server_rhel" {
-  ami           = "ami-0557a15b87f6559cf"
+  ami           = "ami-016eb5d644c333ccb"
   instance_type = "t2.micro"
-  key_name = var.key_name
+  key_name      = var.key_name
   tags = {
-    Name = "TrainingServerInstance_rhel"
+    Name = "Server_rhel"
   }
+
+  user_data = <<-EOF
+            #!/bin/bash
+            echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
+            service sshd restart
+            EOF
+
 }
 
 resource "aws_instance" "training_server_ubuntu" {
   ami           = "ami-007855ac798b5175e"
   instance_type = "t2.micro"
-  key_name = var.key_name
+  key_name      = var.key_name
   tags = {
-    Name = "TrainingServerInstance_ubuntu"
+    Name = "Server_ubuntu"
   }
+
+  user_data = <<-EOF
+            #!/bin/bash
+            echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
+            service sshd restart
+            EOF
 }
 
 # Show the Server IPV4 as Output
